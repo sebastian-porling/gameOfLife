@@ -1,18 +1,39 @@
 var cells = [];
 var spacer;
 var gameStart = false;
-for (var x = 0; x < 72; x++) {
-  cells[x] = []; // create nested array
-}
+var cellsH;
+var cellsW;
 
 function setup() {
-  createCanvas(720, 360);
+  createCanvas(windowWidth, windowHeight);
+  cellsH = windowHeight/10;
+  cellsW = windowWidth/10;
+  for (var x = 0; x < cellsW; x++) {
+  cells[x] = []; // create nested array
+}
   spacer = 10;
   frameRate(10);
 }
 
 function mouseDragged() {
   cells[floor(mouseX/10)][floor(mouseY/10)] = true;
+}
+function clearCells() {
+  for (var x = 0; x < cellsW; x++) {
+    for (var y = 0; y < cellsH; y++) {
+      cells[x][y] = false;
+    }
+  }
+}
+function randomCells() {
+  for (var x = 0; x < cellsW; x++) {
+    for (var y = 0; y < cellsH; y++) {
+      var rdm = random(50)
+      if(rdm > 45){
+        cells[x][y] = true;
+      }
+    }
+  }
 }
 
 
@@ -21,39 +42,22 @@ function keyPressed() {
     gameStart = true;
   } else if (keyCode === LEFT_ARROW) {
     gameStart = false;
-  } else if (keyCode === UP_ARROW) {
-    reset();
-    redraw();
-  } else if (keyCode === DOWN_ARROW) {
-    setRandomCells();
-    redraw();
-  }
-}
-function reset() {
-  for (var x = 0; x < 72; x++) {
-    for (var y = 0; y < 36; y++){
-      cells[x][y] = false;
-      
-    }
-  }
-}
-function setRandomCells(){
-  for (var x = 0; x < 72; x++) {
-    for(var y = 0; x < 37; y++){
-      var rdm = random(50);
-      if(rdm > 45){
-        cells[x][y] = true;
-        
-      }
-    }
+  } else if (keyCode === 67){
+    print(key);
+    clear();
+    clearCells()
+  } else if (keyCode == 82){
+    print(key);
+    clear();
+    randomCells();
   }
 }
 
 function draw() {
   background(0);
 
-  for (var x = 0; x < 72; x++) {
-    for (var y = 0; y < 36; y++) {
+  for (var x = 0; x < cellsW; x++) {
+    for (var y = 0; y < cellsH; y++) {
       if (cells[x][y]) {
         rect(x*10 + spacer/2, y*10 + spacer/2, 10, 10);
       }
