@@ -22,3 +22,4 @@ Planed functionalities:
 - Different colours for live "objects"
 - Able to add different races see [wiki](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
 - Random seeds
+- No edges or corners, make the canvas "infinite". As a donut.
